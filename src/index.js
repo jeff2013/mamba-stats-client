@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import rootReducer from './reducers'
+import rootReducer from './redux/reducers/index'
 import * as serviceWorker from './serviceWorker';
 import thunk from "redux-thunk";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const defaultState = {
+    users: []
+}
+
+const store = createStore(rootReducer, defaultState, applyMiddleware(thunk));
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 ReactDOM.render(

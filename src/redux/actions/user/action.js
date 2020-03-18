@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SET_USERS } from '../actions';
 
 export function fetchUsers() {
-    return function(dispatch) {
+    return function fetchUsers(dispatch) {
         axios.get('http://localhost:3000/user').then(res => {
             console.log(res.data);
             dispatch(setUsers(res.data));
