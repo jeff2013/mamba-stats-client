@@ -1,6 +1,7 @@
 import React from 'react';
 import User from './views/user';
 import './App.css';
+import './_variables.scss';
 import {
   BrowserRouter as Router,
   Switch,
