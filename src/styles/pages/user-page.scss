@@ -20,4 +20,100 @@ div.users-page {
             }
         };
     }
+
+}
+
+div.add-player-modal {
+    position: absolute;
+    height: 250px;
+    top: 25%;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: white;
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
+
+    &:focus {
+        outline: none;
+    }
+
+    p.title {
+        margin-left: 10%;
+        margin-top: $unrelated-distance * 1.5;
+        margin-bottom: $unrelated-distance*2;
+    }
+
+    div.add-player-container {
+        height: 100%;
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            button {
+                width: 100px;
+                height: 30px;
+                font-size: 12px;
+                color: white;
+                background-color: #60A4BE;
+                border-radius: 15px;
+                position: absolute;
+                bottom: $unrelated-distance;
+                right: $unrelated-distance;
+            }
+        }
+
+        div.input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            margin-bottom: $unrelated-distance;
+
+            input {
+                border: 1px solid #9D9D9DBF;
+                width: 80%;
+                height: 25px;
+                text-indent: 10px;
+                
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            &.name {
+                &::before {
+                    content: 'Name';
+                    font-size: 10px;
+                    height: 15px;
+                    width: 50px;
+                    position: absolute;
+                    top: -8px;
+                    left: 15%;
+                    text-align: center;
+                    color: #9D9D9DBF;
+                    background: white;
+                }
+            }
+
+            &.position {
+                &::before {
+                    content: 'Position';
+                    font-size: 10px;
+                    height: 15px;
+                    width: 50px;
+                    position: absolute;
+                    top: -8px;
+                    left: 15%;
+                    text-align: center;
+                    color: #9D9D9DBF;
+                    background: white;
+                }
+            }
+        }
+    }
 }

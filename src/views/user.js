@@ -1,26 +1,30 @@
 import React from 'react'
+import Modal from 'react-modal';
 import UserList from '../components/UserList';
 import '../styles/pages/user-page.scss';
 import { ReactComponent as Plus} from '../assets/plus.svg';
+import CreateUser from '../containers/CreateUser';
+
+Modal.setAppElement(document.getElementById('root'))
 
 export default class Users extends React.Component {
     constructor(props) {
         super(props);
-
-        this.addUser = this.addUser.bind(this);
+        this.state = {
+            isModalOpen: true,
+            name: ''
+        };
     }
 
-
-    componentDidMount() {
-        console.log("user component mounted");
+    addUser = () => {
+        this.setState({isModalOpen: true})
     }
-
-    addUser() {
-        console.log("add user");
-    }    
+    
+    closeModal = () => {
+        this.setState({isModalOpen: false})
+    }
 
     render() {
-        console.log("RENDER USER");
         return (
             <div className="users-page">
                 <div className="header">
@@ -30,7 +34,12 @@ export default class Users extends React.Component {
                     </button>
                 </div>
                 <UserList/>
-                
+                <Modal
+                    isOpen={this.state.isModalOpen}
+                    onRequestClose={this.closeModal}
+                    className="add-player-modal">
+                    <CreateUser onComplete={this.closeModal}></CreateUser>
+                </Modal>
             </div>
         )
     }
