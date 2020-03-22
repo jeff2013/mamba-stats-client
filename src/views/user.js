@@ -11,7 +11,7 @@ export default class Users extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalOpen: true,
+            isModalOpen: false,
             name: ''
         };
     }
