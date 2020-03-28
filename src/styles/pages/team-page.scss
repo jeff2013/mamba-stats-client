@@ -1,0 +1,21 @@
+@import 'src/variables';
+
+div.teams-page {
+    display: flex;
+    width: auto;
+    height: 100%;
+    padding-left: $unrelated-distance;
+    padding-right: $unrelated-distance;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+        margin: unset;
+        padding: unset;
+    }
+
+    p.subheading {
+        margin: unset;
+    }
+
+}
