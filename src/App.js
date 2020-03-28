@@ -1,5 +1,7 @@
 import React from 'react';
 import User from './views/user';
+import TeamPage from './views/team-page';
+import CreateTeamsPage from './views/create-team-page';
 import './App.css';
 import './_variables.scss';
 import {
@@ -21,14 +23,23 @@ function App() {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/teams">Teams</Link>
+            </li>
           </ul>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/teams/create">
+            <CreateTeamsPage/>
+          </Route>
           <Route path="/users">
             <User />
+          </Route>
+          <Route path="/teams">
+            <TeamPage />
           </Route>
           <Route path="/">
             <Home/>

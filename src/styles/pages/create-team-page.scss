@@ -1,0 +1,33 @@
+@import 'src/variables';
+
+div.create-team-page {
+
+    h1 {
+        text-align: left;
+    }
+
+    p.avaialble-header {
+        font-size: 18px;
+        color: gray;
+        text-align: left;
+    }
+
+    margin: $unrelated-distance * 2;
+
+    ul.team-selected-list {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+
+        li {
+            width: 33%;
+            svg.player {
+                height: 40px;
+                width: 40px;
+            }
+        }
+    }
+}
