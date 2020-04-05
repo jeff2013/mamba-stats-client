@@ -8,11 +8,8 @@ import CreateUser from '../containers/CreateUser';
 Modal.setAppElement(document.getElementById('root'))
 
 export default class Users extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isModalOpen: false
-        };
+    state = {
+        isModalOpen: false
     }
 
     addUser = () => {
@@ -29,7 +26,7 @@ export default class Users extends React.Component {
                 <div className="header">
                     <h1>PLAYERS</h1>
                     <button onClick={this.addUser}>
-                        <Plus></Plus>
+                        <Plus/>
                     </button>
                 </div>
                 <UserList/>
@@ -37,7 +34,7 @@ export default class Users extends React.Component {
                     isOpen={this.state.isModalOpen}
                     onRequestClose={this.closeModal}
                     className="add-player-modal">
-                    <CreateUser onComplete={this.closeModal}></CreateUser>
+                    <CreateUser onComplete={this.closeModal}/>
                 </Modal>
             </div>
         )

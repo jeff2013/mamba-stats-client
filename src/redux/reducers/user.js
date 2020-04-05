@@ -5,15 +5,22 @@ import { SET_USERS, ADD_USER } from '../actions/actions'
  */
 
 const initialState = {
-    users: []
+    users: [],
+    currentUser: {}
 }
 
 const users = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
-            return [...action.payload]
+            return {
+                ...state,
+                users: [...action.payload]
+            }
         case ADD_USER:
-            return [...state, action.payload]
+            return {
+                ...state,
+                users: [...state.users, action.payload]
+            }
         default:
             return state;
     }

@@ -20,6 +20,7 @@ div.create-team-page {
         list-style-type: none;
         flex-wrap: wrap;
         justify-content: center;
+        padding: unset;
         
 
         li {
@@ -27,6 +28,18 @@ div.create-team-page {
             svg.player {
                 height: 40px;
                 width: 40px;
+                fill:  lightgray;
+
+                &.selected {
+                    fill: black;
+                }
+            }
+
+            p {
+                margin: unset;
+                padding: unset;
+                height: 20px;
+                font-size: 12px;
             }
         }
     }

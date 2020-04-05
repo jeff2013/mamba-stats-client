@@ -1,18 +1,21 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { fetchTeams } from '../../redux/actions/team/action';
 import  TeamUsers from './TeamUsers';
 import { useEffect } from "react";
 
 
-function TeamList(props) {
-
-    const teams = useSelector(state => state.teams);
-
+/**
+ * 
+ * Can spread the params
+ * 
+ * @param {*} param0 
+ */
+function TeamList({teams, fetchTeams}) {
     useEffect(() => {
         // Component did mount
-        props.fetchTeams();
-    }, [])
+        fetchTeams();
+    }, [fetchTeams])
 
      return (
 

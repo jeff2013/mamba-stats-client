@@ -15,5 +15,4 @@ export default class TeamPage extends React.Component {
             </div>
         )
     }
-
 }

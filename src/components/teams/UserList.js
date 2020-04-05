@@ -1,19 +1,15 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { fetchUsers } from '../../redux/actions/user/action';
 import '../../styles/components/teams/team-user-list.scss';
 import { useEffect } from "react";
 import SelectUser from './SelectUser';
 
-function UserList(props) {
-
-    const users = useSelector(state => state.users);
-
-    const onChange = props.onChange;
+function UserList({users, onChange, fetchUsers}) {
 
     useEffect(() => {
-        props.fetchUsers();
-    }, [])
+        fetchUsers();
+    }, [fetchUsers])
 
      return (
         <ul className="user-list">
@@ -31,7 +27,7 @@ function UserList(props) {
  * @param {*} state 
  */
 const mapStateToProps = state =>  {
-    return { users: state.users }
+    return { users: state.users.users }
 }
 
 export default connect(

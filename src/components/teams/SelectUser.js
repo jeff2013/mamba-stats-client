@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
+import { ReactComponent as Checkmark } from '../../assets/checkmark.svg';
 
 export default function SelectUser(props) {
     const user = props.user;
@@ -8,19 +9,28 @@ export default function SelectUser(props) {
 
     const [isSelected, setIsSelected] = useState(() => false)
 
-    const [checkmark, setCheckmark] = useSpring(() => ({
+    const [buttonResize, setButtonResize] = useSpring(() => ({
         width: '100px',
         fontSize: '14px',
         backgroundColor: 'green'
     }));
 
+    const [checkmark, setCheckmark] = useSpring(() => ({
+        display: 'none'
+    }));
+
     useEffect(() => {
-        setCheckmark({
+        setButtonResize({
             width: isSelected ? '25px' : '100px',
             fontSize: isSelected ? '0px' : '14px',
             backgroundColor: isSelected ? 'green' : 'lightsalmon'
         })
-    }, [isSelected, setCheckmark])
+        setCheckmark({
+            display: isSelected ? 'block' : 'none',
+            opacity: isSelected ? '1' : '0',
+            delay:  isSelected ? '440' : '0'
+        })
+    }, [isSelected, setButtonResize, setCheckmark])
 
 
     const toggleUser = (user) => {
@@ -35,7 +45,11 @@ export default function SelectUser(props) {
                 <p className="name">{user.name}</p>
                 <p className="position">{user.position}</p>
             </div>
-            <animated.button style={checkmark} onClick={() => toggleUser(user)}>Select User</animated.button>
+            <animated.button className="select-user" style={buttonResize} onClick={() => toggleUser(user)}>Select User
+                <animated.div style={checkmark}>
+                    <Checkmark />
+                </animated.div>
+            </animated.button>
         </div>
     )
 }

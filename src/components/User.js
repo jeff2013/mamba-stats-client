@@ -1,11 +1,7 @@
 import React from 'react';
 import '../styles/user.scss';
 
-function User(props) {
-
-    const player = props.player;
-    console.log(player);
-
+function User({player}) {
     return (
         <div className="user-container">
             <div className="left-container">

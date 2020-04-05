@@ -2,16 +2,9 @@ import React from 'react'
 import UserList from '../components/teams/UserList';
 import '../styles/pages/create-team-page.scss';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { ReactComponent as PlayerUnselected } from '../assets/player-unselected.svg';
-import { ReactComponent as PlayerSelected } from '../assets/player-selected.svg';
 
 export default function CreateTeamPage(props) {
-
-    const [maxPlayers, setMaxPlayers] =  useState(() => {
-        return 5;
-    })
-
     const [team, setTeam] = useState(new Map())
 
     const toggleUser = (user, isSelected) => {
@@ -36,17 +29,12 @@ export default function CreateTeamPage(props) {
 }
 
 function TeamSelected(props) {
-
     const team = props.team;
-
-    const [maxPlayers, setMaxPlayers] =  useState(() => {
-        return 5;
-    })
-    
+    const maxPlayers = 5;
     const items = [];
     
     [...team.keys()].map(userId => {
-        items.push(team.get(userId))
+        return items.push(team.get(userId))
     });
 
     const emptyPlayers = maxPlayers - items.length;
@@ -58,8 +46,8 @@ function TeamSelected(props) {
     return (
         <ul className="team-selected-list">    
             {items.map(item => (
-                <li key={`team-user-${item.id}`}>
-                    <PlayerUnselected className="player"></PlayerUnselected>
+                <li key={`team-user-${item.id}`} >
+                    <PlayerUnselected className={"player " + (item.name === '' ? '' : 'selected' )}></PlayerUnselected>
                     <p>{item.name}</p>
                 </li>
                 ))
