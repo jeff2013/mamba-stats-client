@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SET_TEAMS } from '../actions';
+import { SET_TEAMS, ADD_TEAM } from '../actions';
 
 export const setTeams = (teams) => {
     return {
@@ -15,5 +15,24 @@ export const fetchTeams = () => {
         }).catch(err => {
             throw(err);
         });
+    }
+}
+
+export const addTeam = (team) => {
+    return {
+        type: ADD_TEAM,
+        payload: team
+    }
+}
+
+export const createTeam = (name, players) => {
+    return (dispatch) => {
+        return axios.post('http://localhost:3000/team', {team: {name: name, players: players}})
+            .then(res => {
+                dispatch(addTeam(res.data))
+            })
+            .catch(err => {
+                throw(err);
+            })
     }
 }

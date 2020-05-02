@@ -13,3 +13,4 @@ export const SET_USERS = 'SET_USERS';
  */
 
  export const SET_TEAMS = 'SET_TEAMS';
+ export const ADD_TEAM = 'ADD_TEAM';
