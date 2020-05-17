@@ -5,9 +5,11 @@ import { useState } from 'react';
 import { ReactComponent as PlayerUnselected } from '../assets/player-unselected.svg';
 import { connect } from 'react-redux';
 import UserList from '../components/teams/UserList';
+import { useHistory } from 'react-router-dom';
 
 function CreateTeamPage(props) {
     const [team, setTeam] = useState(new Map())
+    const history = useHistory();
 
     const [teamName, setTeamName] = useState('');
 
@@ -23,12 +25,13 @@ function CreateTeamPage(props) {
     const submitTeam = () => {
         const players = Array.from(team.keys());
         props.onCreateTeam(teamName, players);
+        history.push('/teams');
     }
 
     return (
         <div className="create-team-page">
             <h1>CREATE TEAM</h1>
-            <div>
+            <div className="input-container team-name">
                 <input type="text" name="Team Name" value={teamName} onChange={e => setTeamName(e.target.value)}></input>
             </div>
             <div className="players-selected-container">
@@ -36,7 +39,7 @@ function CreateTeamPage(props) {
             </div>
             <p className="avaialble-header">AVAILABLE PLAYERS</p>
             <UserList onChange={(user, isSelected) => toggleUser(user, isSelected)}></UserList>
-            <button className="done-button" onClick={() => submitTeam()}>Done</button>
+            <button className="done-button primary" onClick={() => submitTeam()}>Done</button>
         </div> 
     )
 }

@@ -1,6 +1,8 @@
 @import 'src/variables';
 
 div.create-team-page {
+    display: flex;
+    flex-direction: column;
 
     h1 {
         text-align: left;
@@ -42,5 +44,20 @@ div.create-team-page {
                 font-size: 12px;
             }
         }
+    }
+
+    div.input-container {
+        &.team-name {
+            input {
+                width: 100%;
+            }
+        }
+        margin-bottom: $unrelated-distance*2;
+    }
+
+    button.done-button {
+        margin-right: $unrelated-distance;
+        margin-top: $unrelated-distance*2;
+        margin-left: auto;
     }
 }
