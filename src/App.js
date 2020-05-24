@@ -2,6 +2,7 @@ import React from 'react';
 import User from './views/user';
 import TeamPage from './views/team-page';
 import CreateTeamsPage from './views/create-team-page';
+import LoginPage from './views/login-page';
 import './App.css';
 import './_variables.scss';
 import {
@@ -26,12 +27,18 @@ function App() {
             <li>
               <Link to="/teams">Teams</Link>
             </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/login">
+            <LoginPage/>
+          </Route>
           <Route path="/teams/create">
             <CreateTeamsPage/>
           </Route>
