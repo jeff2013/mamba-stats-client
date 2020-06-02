@@ -22,3 +22,23 @@ export const SET_USERS = 'SET_USERS';
  */
 
  export const ADD_GROUP = 'ADD_GROUP';
+
+/**
+ * ============================
+ * ========== SESSION =========
+ * ============================
+ */
+
+ export const ADD_SESSION = 'ADD_SESSION';
+ export const SET_SESSION = 'SET_SESSION';
+
+
+/**
+ * ============================
+ * =========== GAME ==========
+ * ============================
+ */
+
+ export const ADD_GAME = 'ADD_GAME';
+ export const SET_GAME = 'SET_GAME';
+ export const ADD_STATS = 'ADD_STATS';

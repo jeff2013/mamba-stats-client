@@ -11,7 +11,7 @@ import { useEffect } from "react";
  * 
  * @param {*} param0 
  */
-function TeamList({teams, fetchTeams}) {
+function TeamList({teams, fetchTeams, selectTeam, id}) {
     useEffect(() => {
         // Component did mount
         fetchTeams();
@@ -22,7 +22,7 @@ function TeamList({teams, fetchTeams}) {
         <ul className="user-list">
             {teams && teams.length
             ? teams.map((team, index) => {
-                return <TeamUsers key={`team-${team.id}`} team={team}></TeamUsers>;
+                return <TeamUsers key={`team-${team.id}`} team={team} click={() => selectTeam(team, id)}></TeamUsers>;
                 })
             : "No Teams, yay!"}
         </ul>
