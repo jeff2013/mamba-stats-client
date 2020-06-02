@@ -7,17 +7,32 @@ import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './redux/reducers/index'
 import * as serviceWorker from './serviceWorker';
 import thunk from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { PersistGate } from 'redux-persist/integration/react'
 
 const defaultState = {
     users: []
 }
 
-const store = createStore(rootReducer, defaultState, applyMiddleware(thunk));
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+const store = createStore(persistedReducer, defaultState, applyMiddleware(thunk));
+const persistor = persistStore(store)
+
+// FIX ME THIS IS DEBUG CODE
 const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
+// TODO: ADD LOADING STATE
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+            <App />
+        </PersistGate>
     </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

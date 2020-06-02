@@ -1,12 +1,22 @@
 import axios from 'axios';
 import { SET_USERS, ADD_USER } from '../actions';
 
-export function fetchUsers() {
-    return function fetchUsers(dispatch) {
-        axios.get('http://localhost:3000/user').then(res => {
-            dispatch(setUsers(res.data));
-        }) 
-    }
+// export function fetchUsers() {
+//     return function fetchUsers(dispatch) {
+//         axios.get('http://localhost:3000/user').then(res => {
+//             dispatch(setUsers(res.data));
+//         }) 
+//     }
+// }
+
+export const fetchUsers = () => dispatch => {
+    axios.get('http://localhost:3000/user', {
+        headers: {
+            'Authorization' : localStorage.getItem('token')
+        }
+    }).then(res => {
+        dispatch(setUsers(res.data));
+    })
 }
 
 function setUsers(data) {
@@ -25,7 +35,11 @@ export const addUser = (user) => {
 
 export const createUser = ({name}) => {
     return (dispatch) => {
-        return axios.post('http://localhost:3000/user', {name: name})
+        return axios.post('http://localhost:3000/user', {name: name}, {
+            headers: {
+                'Authorization' : localStorage.getItem('token')
+            }
+        })
             .then(res => {
                 dispatch(addUser(res.data))
             })

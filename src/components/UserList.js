@@ -12,7 +12,7 @@ class UserList extends React.Component {
     }
 
      render() {
-         const users = this.props.users;
+        const users = this.props.users;
         return (
         <ul className="user-list">
             {users && users.length
@@ -30,7 +30,7 @@ class UserList extends React.Component {
  * @param {*} state 
  */
 const mapStateToProps = state =>  {
-    return { users: state.users }
+    return { users: state.users.users }
 }
 
 export default connect(
