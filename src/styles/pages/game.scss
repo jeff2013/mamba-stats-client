@@ -2,7 +2,12 @@
 
 div.game-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
+    div.scores {
+        display: flex;
+        flex-direction: row;
+    }
 
     div.scorekeep-container {
         display: flex;

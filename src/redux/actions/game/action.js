@@ -73,3 +73,21 @@ export const createGame = (homeTeamId, awayTeamId, sessionId) => {
         })
      }
  }
+
+ export const endGame = (gameId) => {
+     return (dispatch) => {
+         return axios.post('http://localhost:3000/game/end', {
+             gameId: gameId
+         }, {
+            headers: {
+                'Authorization' : localStorage.getItem('token')
+            }
+         })
+         .then(res => {
+             dispatch(setGame(res.data))
+         })
+         .catch(err => {
+            throw(err);
+        })
+     }
+ }

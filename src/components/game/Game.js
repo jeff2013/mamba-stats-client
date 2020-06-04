@@ -3,34 +3,42 @@ import { connect } from 'react-redux';
 import { useState } from 'react';
 import '../../styles/pages/game.scss';
 import { useEffect } from 'react';
-import { addGameStats } from '../../redux/actions/game/action';
+import { addGameStats, endGame } from '../../redux/actions/game/action';
 
-function Game({game, teams}) {
+function Game({game, teams, completeGame}) {
     const [homeTeam, setHomeTeam] = useState();
     const [awayTeam, setAwayTeam] = useState();
 
     useEffect(() => {
-        console.log("GAME");
         if (game) {
             const teamMap = new Map(teams.map(t => [t.id, t]));
             setHomeTeam(teamMap.get(game.home_team_id));
             setAwayTeam(teamMap.get(game.away_team_id));
-            
         }
     }, [game])
 
+    const endGame = (game) => {
+        if (game) {
+            completeGame(game.id);
+        }
+    }
+
     return (
         <div className="game-container">
-            <ScoreKeepContainer type='home' team={homeTeam}></ScoreKeepContainer>
-            <ScoreKeepContainer type='away' team={awayTeam}></ScoreKeepContainer>
-            {/* <button>End game</button> */}
+            <div className="scores">
+                <ScoreKeepContainer type='home' team={homeTeam}></ScoreKeepContainer>
+                <ScoreKeepContainer type='away' team={awayTeam}></ScoreKeepContainer>
+            </div>
+            <button onClick={() => endGame(game)}>End game</button>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        completeGame: (gameId) => {
+            return dispatch(endGame(gameId))
+        }
     }
 }
 

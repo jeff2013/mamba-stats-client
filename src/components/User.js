@@ -10,15 +10,15 @@ function User({player}) {
             </div>
             <div className="right-container">
                 <div className="stat">
-                    <b>{player.ppg}</b>
+                    <b>{player.points}</b>
                     <p className="subtext">PPG</p>
                 </div>  
                 <div className="stat">
-                    <b>{player.apg}</b>
+                    <b>{player.assists}</b>
                     <p className="subtext">APG</p>
                 </div> 
                 <div className="stat">
-                    <b>{player.rpg}</b>
+                    <b>{player.rebounds}</b>
                     <p className="subtext">RPG</p>
                 </div> 
             </div>
