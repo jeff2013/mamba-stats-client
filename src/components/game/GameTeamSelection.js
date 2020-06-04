@@ -10,7 +10,7 @@ import { fetchSession } from '../../redux/actions/session/action';
 
 Modal.setAppElement(document.getElementById('root'))
 
-function GameTeamSelection({fetchSession, startGame, session}) {
+function GameTeamSelection({fetchSession, fetchActiveGame, startGame, session}) {
     const [homeTeam, setHomeTeam] = useState();
     const [awayTeam, setAwayTeam] = useState();
     const [isModalOpen, setModalOpen] = useState(false);
@@ -19,6 +19,7 @@ function GameTeamSelection({fetchSession, startGame, session}) {
     useEffect(() => {
         fetchSession().then(res => {
             // Handle loading state
+            fetchActiveGame(res.payload.id);
         });
     }, [])
 
@@ -103,7 +104,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return { 
         session: state.session,
-        game: state.session.games
+        game: state.game
      }
 }
 

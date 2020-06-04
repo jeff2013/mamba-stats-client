@@ -4,11 +4,13 @@ import GameTeamSelection from '../components/game/GameTeamSelection';
 import Game from '../components/game/Game';
 import { createSession, fetchSession } from '../redux/actions/session/action';
 import { useEffect } from 'react';
+import { fetchActiveGame } from '../redux/actions/game/action';
 
 function GamePage({session, game, startSession, fetchSession}) {
     useEffect(() => {
         fetchSession().then(res => {
             // TODO: Handle loading state
+            fetchActiveGame(res.payload.id);
         });
     }, [])
 
@@ -20,7 +22,7 @@ function GamePage({session, game, startSession, fetchSession}) {
         <div>
             <h1>Start a Game</h1>
             { (session.id !== undefined) 
-                        ? (session.games && session.games.length > 0) 
+                        ? (game.id) 
                             ? <Game></Game>
                             : <GameTeamSelection session={session}></GameTeamSelection>
                         : <StartSession createSession={() => createSession()}></StartSession> 
@@ -46,6 +48,9 @@ const mapDispatchToProps = dispatch => {
         },
         fetchSession: () => {
             return dispatch(fetchSession());
+        },
+        fetchActiveGame: (sessionId) => {
+            return dispatch(fetchActiveGame(sessionId));
         }
     }
 }
@@ -53,7 +58,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return { 
         session: state.session,
-        game: state.session.games
+        game: state.game
      }
 }
 

@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         teams: state.teams,
-        game: state.session.games[0]
+        game: state.game
     }
 }
 
@@ -91,7 +91,7 @@ function ScoreKeep({game, type, team, submitStats}) {
 
 const mapScoreStateToProps = state => {
     return {
-        game: state.session.games[0]
+        game: state.game
     }
 }
 

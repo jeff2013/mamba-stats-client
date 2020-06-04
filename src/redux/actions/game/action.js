@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { SET_GAME, ADD_GAME, ADD_STATS } from '../actions';
+import { SET_GAME } from '../actions';
 
-export const fetchActiveGame = () => dispatch => {
-    return axios.get('http://localhost:3000/game', {
+export const fetchActiveGame = (sessionId) => dispatch => {
+    return axios.get(`http://localhost:3000/game/${sessionId}`, {
         headers: {
             'Authorization' : localStorage.getItem('token')
         }
@@ -19,20 +19,6 @@ const setGame = (game) => {
     }
 }
 
-const startGame = (game) => {
-    return {
-        type: ADD_GAME,
-        payload: game
-    }
-}
-
-const setGameStat = (gameStat) => {
-    return {
-        type: ADD_STATS,
-        payload: gameStat
-    }
-}
-
 export const createGame = (homeTeamId, awayTeamId, sessionId) => {
     return (dispatch) => {
         return axios.post('http://localhost:3000/game', {
@@ -45,7 +31,7 @@ export const createGame = (homeTeamId, awayTeamId, sessionId) => {
             }
         })
         .then(res => {
-            dispatch(startGame(res.data))
+            dispatch(setGame(res.data))
         })
         .catch(err => {
             throw(err);
@@ -66,7 +52,7 @@ export const createGame = (homeTeamId, awayTeamId, sessionId) => {
             }
         })
         .then(res => {
-            dispatch(setGameStat(res.data))
+            dispatch(setGame(res.data))
         })
         .catch(err => {
             throw(err);

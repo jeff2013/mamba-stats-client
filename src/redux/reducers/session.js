@@ -12,10 +12,6 @@ const session = (state = initialState, action) => {
             return {
                 ...action.payload
             }
-        case ADD_STATS:
-            return {
-                ...action.payload
-            }
         default: 
             return state;
     }
