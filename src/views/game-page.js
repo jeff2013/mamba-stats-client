@@ -10,7 +10,13 @@ function GamePage({session, game, startSession, fetchSession}) {
     useEffect(() => {
         fetchSession().then(res => {
             // TODO: Handle loading state
-            fetchActiveGame(res.payload.id);
+            if (res.payload && res.payload.id) {
+                fetchActiveGame(res.payload.id);
+            } else {
+                // TODO
+                // NO ACTIVE GAME
+                // probably post to finish anyactive games
+            }
         });
     }, [])
 

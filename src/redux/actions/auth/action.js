@@ -6,16 +6,11 @@ export const login = (name, password) => {
         return axios.post('http://localhost:3000/login', {
             name: name,
             password: password,
-        },
-        {
-            headers: {
-                'Authorization' : localStorage.getItem('token')
-           }
         })
             .then(res => {
-                console.log("Logged in");
                 dispatch(addGroup(res.data));
                 localStorage.setItem('token', res.data.token)
+                localStorage.setItem('expiry', res.data.expiry)
                 return res.data.id;
             })
             .catch(err => {

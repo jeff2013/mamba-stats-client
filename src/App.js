@@ -4,20 +4,23 @@ import TeamPage from './views/team-page';
 import CreateTeamsPage from './views/create-team-page';
 import LoginPage from './views/login-page';
 import GamePage from './views/game-page';
-import './App.css';
+import moment from 'moment';
+
+import './App.scss';
 import './_variables.scss';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
+        <nav className="tab-bar">
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -29,9 +32,6 @@ function App() {
               <Link to="/teams">Teams</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
               <Link to="/game">Game</Link>
             </li>
           </ul>
@@ -40,21 +40,21 @@ function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/game">
+          <PrivateRoute path="/game">
             <GamePage/>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
             <LoginPage/>
           </Route>
-          <Route path="/teams/create">
+          <PrivateRoute path="/teams/create">
             <CreateTeamsPage/>
-          </Route>
-          <Route path="/users">
+          </PrivateRoute>
+          <PrivateRoute path="/users">
             <User />
-          </Route>
-          <Route path="/teams">
+          </PrivateRoute>
+          <PrivateRoute path="/teams">
             <TeamPage />
-          </Route>
+          </PrivateRoute>
           <Route path="/">
             <Home/>
           </Route>
@@ -66,6 +66,31 @@ function App() {
 
 function Home() {
   return <h2>Home</h2>;
+}
+function PrivateRoute({ children, ...rest }) {
+
+  const token = localStorage.getItem('token');
+  const expiry = localStorage.getItem('expiry');
+  // FIXME if expiry is within 24 hours, re-sign JWT token otherwise logout
+  const authenticated = token && expiry && moment(expiry).diff(moment(), 'hours') > 0;
+
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        authenticated ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
 }
 
 export default App;
