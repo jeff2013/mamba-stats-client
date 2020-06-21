@@ -4,26 +4,14 @@ div.teams-page {
     display: flex;
     width: auto;
     height: 100%;
-    padding-left: $unrelated-distance;
-    padding-right: $unrelated-distance;
+    padding-left: $unrelated-distance * 2 ;
+    padding-right: $unrelated-distance * 2;
+    padding-top: $unrelated-distance * 2 ;
     flex-direction: column;
     align-items: flex-start;
 
     h1 {
-        margin: unset;
-        padding: unset;
-    }
-
-    p.subheading {
-        margin: unset;
-    }
-
-    header.header {
-        height: 70px;
-        width: 100vw;
-        margin-left: -$unrelated-distance;
-        background: orange;
-        position: relative;
+        margin-bottom: unset;
     }
 
     button.circle-add {

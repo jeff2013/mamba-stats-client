@@ -6,17 +6,22 @@ import { ReactComponent as PlayerUnselected } from '../assets/player-unselected.
 import { connect } from 'react-redux';
 import UserList from '../components/teams/UserList';
 import { useHistory } from 'react-router-dom';
+import { ReactComponent as Plus} from '../assets/plus.svg';
 
 function CreateTeamPage(props) {
     const [team, setTeam] = useState(new Map())
     const history = useHistory();
 
     const [teamName, setTeamName] = useState('');
+    const [teamFull, setTeamFull] = useState(false);
+    const minPlayers = 5;
 
     const toggleUser = (user, isSelected) => {
         if (isSelected) {
+            setTeamFull(team.size + 1 >= minPlayers);
             setTeam(new Map(team.set(user.id, user)))
         } else {
+            setTeamFull(team.size - 1 >= minPlayers);
             team.delete(user.id);
             setTeam(new Map(team))
         }
@@ -24,13 +29,26 @@ function CreateTeamPage(props) {
 
     const submitTeam = () => {
         const players = Array.from(team.keys());
-        props.onCreateTeam(teamName, players);
-        history.push('/teams');
+        if (players.length === minPlayers) {
+            props.onCreateTeam(teamName, players);
+            history.push('/teams');
+        } else {
+             /**
+             * TODO: SHOW ERROR BANNER OR MODAL
+             */
+        }
+    }
+
+    const close = () => {
+        history.goBack();
     }
 
     return (
         <div className="create-team-page">
-            <h1>CREATE TEAM</h1>
+            <header>
+                <h1>CREATE TEAM</h1>
+                <button onClick={() => close()}><Plus/></button>
+            </header>
             <div className="input-container team-name">
                 <input type="text" name="Team Name" value={teamName} onChange={e => setTeamName(e.target.value)}></input>
             </div>
@@ -38,7 +56,7 @@ function CreateTeamPage(props) {
                 <TeamSelected team={team}></TeamSelected>
             </div>
             <p className="avaialble-header">AVAILABLE PLAYERS</p>
-            <UserList onChange={(user, isSelected) => toggleUser(user, isSelected)}></UserList>
+            <UserList onChange={(user, isSelected) => toggleUser(user, isSelected)} canSelect={!teamFull}></UserList>
             <button className="done-button primary" onClick={() => submitTeam()}>Done</button>
         </div> 
     )

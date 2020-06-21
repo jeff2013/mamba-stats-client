@@ -35,7 +35,7 @@ function Login(props) {
     useEffect(() => {
         if (props.group_name) {
             setGroupName(props.group_name)
-        }   
+        }
     }, [])
 
     const login = async(groupName, password) => {

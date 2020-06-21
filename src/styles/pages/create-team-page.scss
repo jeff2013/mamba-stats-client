@@ -4,6 +4,26 @@ div.create-team-page {
     display: flex;
     flex-direction: column;
 
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+            margin-right: $unrelated-distance;
+            background-color: unset;
+            border: unset;
+            height: 45px;
+            width: 45px;
+            svg {
+                height: 100%;
+                width: 100%;
+                transform: rotate(45deg);
+            }
+        }
+    }
+
     h1 {
         text-align: left;
     }
@@ -12,6 +32,7 @@ div.create-team-page {
         font-size: 18px;
         color: gray;
         text-align: left;
+        margin-bottom: unset;
     }
 
     margin: $unrelated-distance * 2;

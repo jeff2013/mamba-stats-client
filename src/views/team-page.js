@@ -9,9 +9,7 @@ export default function TeamPage() {
 
     return (
         <div className="teams-page">
-            <header className="header">
-                <h1>Teams</h1>
-            </header>
+            <h1>TEAMS</h1>
             <TeamList/>
             <button className="circle-add" onClick={() => history.push('/teams/create')}>
                 <Plus/>

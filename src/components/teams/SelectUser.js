@@ -3,10 +3,7 @@ import { useState, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { ReactComponent as Checkmark } from '../../assets/checkmark.svg';
 
-export default function SelectUser(props) {
-    const user = props.user;
-    const selectUser = props.select;
-
+export default function SelectUser({user, selectUser, canSelect}) {
     const [isSelected, setIsSelected] = useState(() => false)
 
     const [buttonResize, setButtonResize] = useSpring(() => ({
@@ -34,9 +31,15 @@ export default function SelectUser(props) {
 
 
     const toggleUser = (user) => {
-        const _isSelected = !isSelected;
-        setIsSelected(_isSelected);
-        selectUser(user, _isSelected);
+        if(canSelect) {
+            const _isSelected = !isSelected;
+            setIsSelected(_isSelected);
+            selectUser(user, _isSelected);
+        } else {
+            /**
+             * TODO: SHOW ERROR BANNER OR MODAL
+             */
+        }
     }
 
     return (

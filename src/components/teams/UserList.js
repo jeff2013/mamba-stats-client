@@ -5,7 +5,7 @@ import '../../styles/components/teams/team-user-list.scss';
 import { useEffect } from "react";
 import SelectUser from './SelectUser';
 
-function UserList({users, onChange, fetchUsers}) {
+function UserList({users, canSelect, onChange, fetchUsers}) {
 
     useEffect(() => {
         fetchUsers();
@@ -15,7 +15,7 @@ function UserList({users, onChange, fetchUsers}) {
         <ul className="user-list">
             {users && users.length
             ? users.map((user, index) => {
-                return <SelectUser key={`user-${user.id}`} user={user} select={(user, isSelected) => onChange(user, isSelected)}></SelectUser>
+                return <SelectUser key={`user-${user.id}`} user={user} selectUser={(user, isSelected) => onChange(user, isSelected)} canSelect={canSelect}></SelectUser>
                 })
             : "No users, yay!"}
         </ul>
