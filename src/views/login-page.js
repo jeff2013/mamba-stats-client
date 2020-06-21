@@ -34,7 +34,6 @@ function Login(props) {
 
     useEffect(() => {
         if (props.group_name) {
-            console.log("SET GROUP ID");
             setGroupName(props.group_name)
         }   
     }, [])

@@ -1,18 +1,21 @@
 import React from 'react';
 import '../styles/pages/team-page.scss';
-import TeamUsers from '../components/teams/TeamUsers';
 import TeamList from '../components/teams/TeamList';
+import { useHistory } from 'react-router-dom';
+import { ReactComponent as Plus} from '../assets/plus.svg';
 
-export default class TeamPage extends React.Component {
+export default function TeamPage() {
+    const history = useHistory();
 
-    render() {
-        return (
-            <div className="teams-page">
-                <h1>SELECT TEAMS</h1>
-                <p className="subheading">Pick 2 Teams</p>
-                <TeamUsers isEmpty/>
-                <TeamList/>
-            </div>
-        )
-    }
+    return (
+        <div className="teams-page">
+            <header className="header">
+                <h1>Teams</h1>
+            </header>
+            <TeamList/>
+            <button className="circle-add" onClick={() => history.push('/teams/create')}>
+                <Plus/>
+            </button>
+        </div>
+    )
 }

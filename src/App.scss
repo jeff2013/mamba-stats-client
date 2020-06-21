@@ -45,8 +45,12 @@ nav.tab-bar {
   position: fixed;
   bottom: 0px;
   width: 100%;
-  height: 60px;
-  border: 1px solid blue;
+  height: 70px;
+  background-color: rgba(224, 224, 224, 0.8);
+
+  .icon {
+    height: 25px;
+  }
 
   ul {
     display: flex;
@@ -60,12 +64,13 @@ nav.tab-bar {
     justify-content: space-around;
 
     li {
-      border: 1px solid gray;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      border-right: 1px solid grey;
+
     }
   }
 }

@@ -24,9 +24,6 @@ function GameTeamSelection({fetchSession, fetchActiveGame, startGame, session}) 
     }, [])
 
     const selectTeamFor = (team, identifier) => {
-        console.log(team);
-        console.log(identifier);
-        
         switch(identifier) {
             case 'home':
                 setHomeTeam(team);

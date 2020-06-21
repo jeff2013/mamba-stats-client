@@ -18,4 +18,29 @@ div.teams-page {
         margin: unset;
     }
 
+    header.header {
+        height: 70px;
+        width: 100vw;
+        margin-left: -$unrelated-distance;
+        background: orange;
+        position: relative;
+    }
+
+    button.circle-add {
+        height: 50px;
+        width: 50px;
+        border-radius: 25px;
+        border: unset;
+        position: absolute;
+        background-color: orange;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        right: $unrelated-distance*2;
+        bottom: 100px;
+
+        svg {
+            max-height: 20px;
+            max-width: 20px;
+            fill: white;
+        }
+    }
 }

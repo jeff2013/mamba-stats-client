@@ -13,7 +13,6 @@ export const fetchSession = () => dispatch => {
 }
 
 const setSession = (session) => {
-    console.log(session);
     return {
         type: SET_SESSION,
         payload: session

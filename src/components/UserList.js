@@ -3,26 +3,34 @@ import { connect } from "react-redux";
 import { fetchUsers } from '../redux/actions/user/action';
 import  User from '../components/User';
 import '../styles/user-list.scss';
+import performRequest from "../helpers/authentication-redirect";
+import { useHistory } from 'react-router-dom';
+import { useEffect } from "react";
+import { useState } from "react";
+import Loading from '../components/Loading';
 
+function UserList({users, fetchUsers}) {
+    const [canRender, setCanRender] = useState(false)
+    const history = useHistory();
 
-class UserList extends React.Component {
+    useEffect(() => {
+        performRequest(fetchUsers, history, setCanRender);
+    }, [history, fetchUsers])
 
-    componentDidMount() {
-        this.props.fetchUsers();
-    }
-
-     render() {
-        const users = this.props.users;
-        return (
-        <ul className="user-list">
-            {users && users.length
-            ? users.map((user, index) => {
-                return <User key={`user-${user.id}`} player={user}></User>;
-                })
-            : "No users, yay!"}
-        </ul>
-        )
-     };
+    return (
+        <div>
+            { (canRender) 
+                ?   <ul className="user-list">
+                        {users && users.length
+                        ? users.map((user, index) => {
+                            return <User key={`user-${user.id}`} player={user}></User>;
+                            })
+                        : "No users, yay!"}
+                    </ul>
+                : <Loading></Loading>
+            }
+        </div>
+    )
 }
 
 /**
@@ -33,9 +41,15 @@ const mapStateToProps = state =>  {
     return { users: state.users.users }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUsers: () => {
+            return dispatch(fetchUsers());
+        }
+    }
+}
+
 export default connect(
     mapStateToProps,
-    {
-        fetchUsers
-    }
+    mapDispatchToProps
 )(UserList);

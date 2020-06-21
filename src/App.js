@@ -5,6 +5,11 @@ import CreateTeamsPage from './views/create-team-page';
 import LoginPage from './views/login-page';
 import GamePage from './views/game-page';
 import moment from 'moment';
+import { ReactComponent as Player } from './assets/player.svg';
+import { ReactComponent as HomeIcon } from './assets/home.svg';
+import { ReactComponent as TeamsIcon } from './assets/teams.svg';
+import { ReactComponent as GameIcon } from './assets/ball.svg';
+
 
 import './App.scss';
 import './_variables.scss';
@@ -23,16 +28,24 @@ function App() {
         <nav className="tab-bar">
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">
+                <HomeIcon className="icon"/>
+              </Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/users">
+                <Player className="icon"/>
+              </Link>
             </li>
             <li>
-              <Link to="/teams">Teams</Link>
+              <Link to="/teams">
+                <TeamsIcon className="icon"/>
+              </Link>
             </li>
             <li>
-              <Link to="/game">Game</Link>
+              <Link to="/game">
+                <GameIcon className="icon"/>
+              </Link>
             </li>
           </ul>
         </nav>

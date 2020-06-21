@@ -18,7 +18,6 @@ function TeamList({teams, fetchTeams, selectTeam, id}) {
     }, [fetchTeams])
 
      return (
-
         <ul className="user-list">
             {teams && teams.length
             ? teams.map((team, index) => {

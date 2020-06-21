@@ -1,21 +1,15 @@
 import axios from 'axios';
 import { SET_USERS, ADD_USER } from '../actions';
 
-// export function fetchUsers() {
-//     return function fetchUsers(dispatch) {
-//         axios.get('http://localhost:3000/user').then(res => {
-//             dispatch(setUsers(res.data));
-//         }) 
-//     }
-// }
-
 export const fetchUsers = () => dispatch => {
-    axios.get('http://localhost:3000/user', {
+    return axios.get('http://localhost:3000/user', {
         headers: {
             'Authorization' : localStorage.getItem('token')
         }
     }).then(res => {
         dispatch(setUsers(res.data));
+    }).catch(err => {
+        throw(err); 
     })
 }
 

@@ -4,9 +4,8 @@ ul.user-list {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-around;
     
     div.container {
         display: flex;
