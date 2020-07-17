@@ -10,7 +10,6 @@ import { ReactComponent as HomeIcon } from './assets/home.svg';
 import { ReactComponent as TeamsIcon } from './assets/teams.svg';
 import { ReactComponent as GameIcon } from './assets/ball.svg';
 
-
 import './App.scss';
 import './_variables.scss';
 import {

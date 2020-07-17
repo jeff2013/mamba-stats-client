@@ -4,13 +4,14 @@ import { fetchActiveGame, createGame } from '../../redux/actions/game/action';
 import { useState } from 'react';
 import '../../styles/pages/game-team-selection.scss';
 import Modal from 'react-modal';
-import TeamList from '../teams/TeamList';
+import TeamSelect from '../teams/TeamSelect';
 import { useEffect } from 'react';
 import { fetchSession } from '../../redux/actions/session/action';
+import { fetchTeams } from '../../redux/actions/team/action';
 
 Modal.setAppElement(document.getElementById('root'))
 
-function GameTeamSelection({fetchSession, fetchActiveGame, startGame, session}) {
+function GameTeamSelection({teams, fetchSession, fetchActiveGame, startGame, session, fetchTeams}) {
     const [homeTeam, setHomeTeam] = useState();
     const [awayTeam, setAwayTeam] = useState();
     const [isModalOpen, setModalOpen] = useState(false);
@@ -34,6 +35,7 @@ function GameTeamSelection({fetchSession, fetchActiveGame, startGame, session}) 
             default:
                 break;
         }
+        closeModal();
         
     }
 
@@ -54,34 +56,61 @@ function GameTeamSelection({fetchSession, fetchActiveGame, startGame, session}) 
 
     return (
         <div className="game-team-selection">
-            <h1>GAME</h1>
             <div className="team-selection-container">
                 <div className="selected-teams">
-                    <div className="team-button" onClick={(e) => openTeamSelectModal('home')}>
-                        {
-                            homeTeam ? 
-                            <p>{homeTeam.name}</p>
-                            : <p> + </p>
-                        }
+                    <div className="team-container home">
+                        <div className="team-home">
+                            {
+                                homeTeam ? 
+                                <div className="select-team left">
+                                    <p>{ homeTeam.name} </p>
+                                    <button onClick={(e) => openTeamSelectModal('home')} >Change Team</button>
+                                </div>
+                                : <div className="select-team left">
+                                    <p>Home Team</p>
+                                    <button onClick={(e) => openTeamSelectModal('home')} >Select Team</button>
+                                </div>
+                            }
+                        </div>
+                        <svg className="home" viewBox="0 0 200 75">
+                                <path d="M0 0 H200 Q200 15 185 20 L33 62 Q-5 73 0 30" />
+                            </svg>
                     </div>
-                    <div className="team-button" onClick={(e) => openTeamSelectModal('away')}>
-                    {
-                            awayTeam ? 
-                            <p>{awayTeam.name}</p>
-                            : <p> + </p>
-                        }
-                    </div>
-                </div>
+                    <div className="team-container">
 
-                <button onClick={() => createGame(homeTeam, awayTeam)}>Start Game</button>
+                    <svg className="away" viewBox="0 0 200 75">
+                        <path d="M0 0 H200 Q200 15 185 20 L33 62 Q-5 73 0 30" />
+                    </svg>
+                        <div className="team-away" onClick={(e) => openTeamSelectModal('away')}>
+                        {
+                                awayTeam ? 
+                                <div className="select-team right">
+                                    <p>{ awayTeam.name} </p>
+                                    <button onClick={(e) => openTeamSelectModal('home')} >Change Team</button>
+                                </div>
+                                : <div className="select-team right">
+                                    <p>Away Team</p>
+                                    <button>Select Team</button>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <button className="start-game-button" onClick={() => createGame(homeTeam, awayTeam)}>Start Game</button>
             </div>
 
             <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 className="team-selection-modal">
-                <p>Boom</p>
-                <TeamList selectTeam={(team, id) => selectTeamFor(team, id)} id={teamIdentifier}></TeamList>
+                <h2>
+                    Select A Team
+                </h2>
+                
+                <TeamSelect selectTeam={(team, id) => selectTeamFor(team, id)} id={teamIdentifier}></TeamSelect>
+
             </Modal>
         </div>
     )
@@ -93,6 +122,12 @@ const mapDispatchToProps = dispatch => {
         },
         startGame: (home_id, away_id, session_id) => {
             return dispatch(createGame(home_id, away_id, session_id));
+        },
+        fetchActiveGame: (sessionId) => {
+            return dispatch(fetchActiveGame(sessionId))
+        },
+        fetchTeams: () => {
+            return fetchTeams
         }
     }
 }
@@ -101,7 +136,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return { 
         session: state.session,
-        game: state.game
+        game: state.game,
+        teams: state.teams
      }
 }
 

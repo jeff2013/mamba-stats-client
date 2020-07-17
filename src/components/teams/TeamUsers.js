@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/components/teams/team-users.scss'
-import { useHistory } from 'react-router-dom';
 import { ReactComponent as Caret } from '../../assets/chevron.svg';
 import { useState } from 'react';
 

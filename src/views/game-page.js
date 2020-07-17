@@ -6,12 +6,16 @@ import { createSession, fetchSession } from '../redux/actions/session/action';
 import { useEffect } from 'react';
 import { fetchActiveGame } from '../redux/actions/game/action';
 
-function GamePage({session, game, startSession, fetchSession}) {
+function GamePage({session, game, startSession, fetchSession, fetchGame}) {
     useEffect(() => {
         fetchSession().then(res => {
             // TODO: Handle loading state
+            console.log(res);
             if (res.payload && res.payload.id) {
-                fetchActiveGame(res.payload.id);
+                console.log("FETCH GAME");
+                return fetchGame(res.payload.id).then(res => {
+                    console.log('eh');
+                });
             } else {
                 // TODO
                 // NO ACTIVE GAME
@@ -55,7 +59,7 @@ const mapDispatchToProps = dispatch => {
         fetchSession: () => {
             return dispatch(fetchSession());
         },
-        fetchActiveGame: (sessionId) => {
+        fetchGame: (sessionId) => {
             return dispatch(fetchActiveGame(sessionId));
         }
     }

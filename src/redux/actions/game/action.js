@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { SET_GAME } from '../actions';
 
-export const fetchActiveGame = (sessionId) => dispatch => {
-    return axios.get(`http://localhost:3000/game/${sessionId}`, {
-        headers: {
-            'Authorization' : localStorage.getItem('token')
-        }
-    }).then(res => dispatch(setGame(res.data)))
-    .catch(err => {
-        throw(err);
-    })
+export const fetchActiveGame = (sessionId) => {
+    return (dispatch) => {
+        return axios.get(`http://localhost:3000/game/${sessionId}`, {
+            headers: {
+                'Authorization' : localStorage.getItem('token')
+            }
+        }).then(res => dispatch(setGame(res.data)))
+        .catch(err => {
+            throw(err);
+        })
+    }
 }
 
 const setGame = (game) => {
