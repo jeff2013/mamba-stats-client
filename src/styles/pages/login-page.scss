@@ -1,0 +1,99 @@
+@import 'src/variables';
+
+.login-page {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+
+  background-image: url("../../assets/login.png");
+  background-size: cover;
+  background-position: center;
+
+  h1 {
+    color: white;
+  }
+
+  button.login {
+    position: absolute;
+    right: $unrelated-distance;
+    top: 40%;
+  }
+
+  button.create {
+    position: absolute;
+    left: $unrelated-distance * 2;
+    bottom: $unrelated-distance * 2;
+  }
+
+  button.outline {
+    color: white;
+    font-size: 1em;
+    border: 1px solid white;
+    border-radius: 8px;
+    height: 40px;
+    width: 200px;
+    background-color: unset;
+
+    &.primary {
+      height: 30px;
+      width: 80%;
+      color: $primary-color;
+      border-color: $primary-color;
+      margin-bottom: $unrelated-distance;
+    }
+
+    &.secondary {
+      height: 30px;
+      width: 80%;
+      color: white;
+      background-color: $primary-color;
+    }
+  }
+
+  .account-container {
+    background-color: white;
+    width: 80vw;
+    height: 250px;
+    position: absolute;
+    left: 10vw;
+    top: 36vh;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    will-change: transform, opacity;
+  }
+
+  .flex-row {
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-icon {
+    width: 30px;
+    height: 30px;
+    color: gray;
+  }
+}
+
+.animated-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.front,
+.back {
+  background-size: cover;
+}
+
+.back {
+  background-image: url(https://images.unsplash.com/photo-1544511916-0148ccdeb877?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1901&q=80i&auto=format&fit=crop);
+}
+
+.front {
+  background-image: url(https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&w=1181&q=80&auto=format&fit=crop);
+}
